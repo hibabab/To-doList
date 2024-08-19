@@ -1,0 +1,26 @@
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Start Date</th>
+            <th>Deadline</th>
+            <th>Priority</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let tc of taches; let i = index">
+            <td>{{ i + 1 }}</td>
+            <td>{{ tc.Title }}</td>
+            <td>{{ tc.Description }}</td>
+            <td>{{ tc.StartDate | date: 'short' }}</td>
+            <td>{{ tc.Deadline | date: 'short' }}</td>
+            <td>{{ tc.priority }}</td>
+            <td>
+                <button class="btn btn-danger" (click)="deleteTache(i)">Delete</button>
+            </td>
+        </tr>
+    </tbody>
+</table>
