@@ -15,12 +15,7 @@ export class ListTacheComponent {
     this.taches=this.tacheService.getTaches();
 
   }
-addOneTache()
-{
-  this.tacheService.addTache(this.tache);
-  this.tache={} as Tache;
 
-}
 deleteTache(id:number)
 {
   if(confirm('vous voulez supprimer la tache?'))
