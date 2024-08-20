@@ -1,49 +1,81 @@
 <!-- Button trigger modal -->
-<div class="text-center">
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-      Add a Task
-    </button>
-  </div>
-  
-  <!-- Modal -->
-  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5" id="exampleModalLabel">Add Task</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
+<div class="text-center mb-3">
+  <button type="button" class="my-button" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    <i class="fa fa-plus"></i> Ajouter une tâche
+  </button>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Ajout de Tâche</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <!-- Formulaire d'ajout de tâche -->
+        <form #tacheForm="ngForm" (ngSubmit)="addOneTache()">
+          <!-- Titre -->
           <div class="mb-3">
-            <label for="title" class="form-label">Title</label>
-            <input class="form-control" id="title" placeholder="Title" name="title" [(ngModel)]="tache.Title">
+            <label class="form-label">Titre</label>
+            <input type="text" class="form-control" placeholder="Titre" [(ngModel)]="tache.Title" name="titre" required #titre="ngModel">
+            <div *ngIf="titre.invalid && (titre.dirty || titre.touched)" class="alert alert-danger">
+              <div *ngIf="titre.errors?.['required']">Le titre est requis.</div>
+            </div>
           </div>
+          
+          <!-- Description -->
           <div class="mb-3">
-            <label for="description" class="form-label">Description</label>
-            <textarea class="form-control" id="description" placeholder="Description" name="description" [(ngModel)]="tache.Description"></textarea>
+            <label class="form-label">Description</label>
+            <textarea class="form-control" placeholder="Description" [(ngModel)]="tache.Description" name="description" required #description="ngModel"></textarea>
+            <div *ngIf="description.invalid && (description.dirty || description.touched)" class="alert alert-danger">
+              <div *ngIf="description.errors?.['required']">La description est requise.</div>
+            </div>
           </div>
+          
+          <!-- Date de début -->
           <div class="mb-3">
-            <label for="startDate" class="form-label">Start Date</label>
-            <input class="form-control" id="startDate" type="datetime-local" name="startDate" [(ngModel)]="tache.StartDate">
+            <label class="form-label">Date de début</label>
+            <input type="datetime-local" class="form-control" [(ngModel)]="tache.StartDate" name="startDate" required #startDate="ngModel">
+            <div *ngIf="startDate.invalid && (startDate.dirty || startDate.touched)" class="alert alert-danger">
+              <div *ngIf="startDate.errors?.['required']">La date de début est requise.</div>
+            </div>
           </div>
+          
+          <!-- Date de fin -->
           <div class="mb-3">
-            <label for="deadline" class="form-label">Deadline</label>
-            <input class="form-control" id="deadline" type="datetime-local" name="deadline" [(ngModel)]="tache.Deadline">
+            <label class="form-label">Date de fin</label>
+            <input type="datetime-local" class="form-control" [(ngModel)]="tache.Deadline" name="deadline" required #deadline="ngModel">
+            <div *ngIf="deadline.invalid && (deadline.dirty || deadline.touched)" class="alert alert-danger">
+              <div *ngIf="deadline.errors?.['required']">La date de fin est requise.</div>
+            </div>
           </div>
+          
+          <!-- Priorité -->
           <div class="mb-3">
-            <label for="priority" class="form-label">Priority</label>
-            <select class="form-select" id="priority" name="priority" [(ngModel)]="tache.priority">
-              <option [value]="0">Low</option>
-              <option [value]="1">Medium</option>
-              <option [value]="2">High</option>
+            <label class="form-label">Priorité</label>
+            <select class="form-select" [(ngModel)]="tache.priority" name="priority" required #priority="ngModel">
+              <option value="" disabled>Sélectionnez une priorité</option>
+              <option value="Low">Low</option>
+              <option value="Medium">Medium</option>
+              <option value="High">High</option>
             </select>
+            <div *ngIf="priority.invalid && (priority.dirty || priority.touched)" class="alert alert-danger">
+              <div *ngIf="priority.errors?.['required']">La priorité est requise.</div>
+            </div>
           </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" (click)="addOneTache()" class="btn btn-primary">Add</button>
-        </div>
+        </form>
+      </div>
+      
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          <i class="fa fa-times"></i> Fermer
+        </button>
+        <button type="submit" class="btn btn-primary" [disabled]="tacheForm.invalid" (click)="addOneTache()">
+          <i class="fa fa-plus"></i> Ajouter
+        </button>
       </div>
     </div>
   </div>
-  
+</div>

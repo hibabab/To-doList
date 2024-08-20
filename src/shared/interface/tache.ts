@@ -5,11 +5,13 @@ export interface Tache {
     StartDate: Date;
     Deadline: Date;
     priority: Priority;
+    completed:boolean
+  
    
 }
-
 export enum Priority {
-    Low,
-    Medium,
-    High
-}
+    High = 'High',
+    Medium = 'Medium',
+    Low = 'Low'
+  }
+  

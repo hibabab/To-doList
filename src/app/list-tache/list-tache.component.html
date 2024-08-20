@@ -1,26 +1,70 @@
-<table class="table table-bordered">
-    <thead>
-        <tr>
-            <th>#</th>
-            <th>Title</th>
-            <th>Description</th>
-            <th>Start Date</th>
-            <th>Deadline</th>
-            <th>Priority</th>
-            <th>Action</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let tc of taches; let i = index">
-            <td>{{ i + 1 }}</td>
-            <td>{{ tc.Title }}</td>
-            <td>{{ tc.Description }}</td>
-            <td>{{ tc.StartDate | date: 'short' }}</td>
-            <td>{{ tc.Deadline | date: 'short' }}</td>
-            <td>{{ tc.priority }}</td>
-            <td>
-                <button class="btn btn-danger" (click)="deleteTache(i)">Delete</button>
-            </td>
-        </tr>
-    </tbody>
-</table>
+<section class="vh-100 gradient-custom-2">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <app-add-tache></app-add-tache>
+      <div class="col-md-12 col-xl-10">
+        <div class="card mask-custom">
+          <div class="card-body p-4 text-white">
+            <div class="text-center pt-3 pb-2">
+              <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-todo-list/check1.webp" alt="Check" class="icon-small" loading="lazy">
+              <h2 class="my-4 title-small">Task List</h2>
+            </div>
+            <!-- Tableau des tâches -->
+            <table class="table table-custom mb-0">
+              <thead class="bg-custom text-white">
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Completed</th>
+                  <th scope="col">Title</th>
+                  <th scope="col">Description</th>
+                  <th scope="col">Start Date</th>
+                  <th scope="col">Deadline</th>
+                  <th scope="col">Priority</th>
+                  <th scope="col">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let tc of taches; let i = index;" class="fw-normal">
+                  <th scope="row">
+                    <span class="ms-2">{{ i + 1 }}</span>
+                  </th>
+                  <td class="align-middle">
+                    <input 
+                      class="form-check-input" 
+                      type="checkbox" 
+                      [checked]="tc.completed"
+                      (change)="toggleCompletion(tc)" />
+                  </td>
+                  <td class="align-middle">{{ tc.Title }}</td>
+                  <td class="align-middle">{{ tc.Description }}</td>
+                  <td class="align-middle">{{ tc.StartDate | date: 'short' }}</td>
+                  <td class="align-middle">{{ tc.Deadline | date: 'short' }}</td>
+                  <td class="align-middle">
+                    <h6 class="mb-0">
+                      <span [ngClass]="{
+                        'badge': true,
+                        'bg-danger': tc.priority === 'High',
+                        'bg-warning': tc.priority === 'Medium',
+                        'bg-success': tc.priority === 'Low'
+                      }">{{ tc.priority }}</span>
+                    </h6>
+                  </td>
+                  <td class="align-middle">
+                    <div class="btn-group">
+                      <button class="btn btn-link btn-edit" aria-label="Edit Task">
+                        <i class="fas fa-edit"></i>
+                      </button>
+                      <button class="btn btn-link btn-delete" (click)="deleteTache(i)" aria-label="Delete Task">
+                        <i class="fas fa-trash"></i>
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

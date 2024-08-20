@@ -1,0 +1,134 @@
+/* Dégradé de fond */
+.gradient-custom-2 {
+  /* Fallback pour anciens navigateurs */
+  background: #7e40f6;
+
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: -webkit-linear-gradient(
+    to right,
+    rgba(126, 64, 246, 1),
+    rgba(80, 139, 252, 1)
+  );
+
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: linear-gradient(
+    to right,
+    rgba(126, 64, 246, 1),
+    rgba(80, 139, 252, 1)
+  );
+}
+
+/* Style de la carte avec effet flou et ombre */
+.mask-custom {
+  background: rgba(24, 24, 16, 0.2);
+  border-radius: 2em;
+  backdrop-filter: blur(25px);
+  border: 2px solid rgba(255, 255, 255, 0.05);
+  background-clip: padding-box;
+  box-shadow: 10px 10px 10px rgba(46, 54, 68, 0.03);
+}
+
+/* Groupe de boutons */
+.btn-group {
+  display: flex;
+  gap: 0.5rem; /* Espace entre les boutons */
+}
+
+/* Style pour les boutons d'édition et de suppression */
+.btn-edit, .btn-delete {
+  padding: 0.5rem 1rem; /* Padding pour une meilleure apparence */
+  border: none;
+  border-radius: 0.25rem; /* Coins arrondis */
+  cursor: pointer;
+  color: #fff; /* Couleur du texte */
+  font-size: 0.875rem; /* Taille de la police */
+  transition: background-color 0.3s; /* Transition douce pour le changement de couleur */
+}
+
+/* Bouton d'édition */
+.btn-edit {
+  background-color: #007bff; /* Couleur bleue */
+}
+
+.btn-edit:hover {
+  background-color: #0056b3; /* Couleur plus sombre au survol */
+}
+
+/* Bouton de suppression */
+.btn-delete {
+  background-color: #dc3545; /* Couleur rouge */
+}
+
+.btn-delete:hover {
+  background-color: #c82333; /* Couleur plus sombre au survol */
+}
+
+/* Style pour réduire la taille de l'icône */
+.icon-small {
+  width: 40px; /* Ajustez la taille selon vos besoins */
+  height: auto; /* Conserve les proportions de l'image */
+}
+
+/* Style pour le titre */
+.title-small {
+  font-size: 1.5rem; /* Taille de la police */
+  margin-top: 1rem; /* Espacement au-dessus du titre */
+  margin-bottom: 1rem; /* Espacement en dessous du titre */
+}
+
+/* Style de la carte */
+.card {
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Style du tableau */
+.table-custom {
+  border-collapse: separate;
+  border-spacing: 0;
+  width: 100%; /* Assure que le tableau occupe toute la largeur disponible */
+}
+
+.table-custom thead th {
+  background-color: #343a40; /* Couleur de fond de l'en-tête */
+  color: #ffffff; /* Couleur du texte */
+  font-family: 'Roboto', sans-serif;
+}
+
+.table-custom tbody tr:nth-child(odd) {
+  background-color: #f9f9f9;
+}
+
+.table-custom tbody tr:hover {
+  background-color: #f1f1f1;
+}
+
+/* Style des badges */
+.badge {
+  font-size: 0.9em;
+  padding: 0.5em 1em;
+  border-radius: 20px;
+  text-transform: capitalize;
+}
+
+/* Styles responsifs */
+@media (max-width: 768px) {
+  .table-custom th, .table-custom td {
+    font-size: 0.8rem;
+    padding: 0.5rem;
+  }
+
+  .title-small {
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .icon-small {
+    width: 30px;
+  }
+
+  .title-small {
+    font-size: 1rem;
+  }
+}

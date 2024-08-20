@@ -6,12 +6,14 @@ import { AppComponent } from './app.component';
 import { ListTacheComponent } from './list-tache/list-tache.component';
 import { AddTacheComponent } from './add-tache/add-tache.component';
 import { FormsModule } from '@angular/forms';
+import { EditTaskComponent } from './edit-task/edit-task.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ListTacheComponent,
-    AddTacheComponent
+    AddTacheComponent,
+    EditTaskComponent
   ],
   imports: [
     BrowserModule,
