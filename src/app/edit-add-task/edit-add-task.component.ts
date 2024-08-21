@@ -35,7 +35,7 @@ export class EditAddTaskComponent {
         console.log('Tâche ajoutée:', this.Task);
     } else if (this.title === 'Edit Task') {
         console.log('Modification de la tâche');
-        this.TaskService.updateTache(this.Task);
+        this.TaskService.updateTask(this.Task);
         console.log('Tâche modifiée:', this.Task);
     }
 
@@ -43,6 +43,5 @@ export class EditAddTaskComponent {
 }
 
 }
-
 
 

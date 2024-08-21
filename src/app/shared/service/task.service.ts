@@ -7,7 +7,7 @@ import { Task } from '../interface/task';
 export class TaskService {
 
   
-  private localStorageKey = 'taches'; // Clé pour le localStorage
+  private localStorageKey = 'taches'; 
   tasks: Task[] = [];
 
   constructor() {
@@ -57,17 +57,28 @@ export class TaskService {
    
     this.tasks[index].completed = !this.tasks[index].completed;
   
-    // Sauvegarder les tâches après changement de statut
+   
     this.saveTaches();
   }
   
 
-  // Méthode pour mettre à jour une tâche
-  updateTache(updatedTache: Task): void {
-    const index = this.tasks.findIndex(tache => tache.Id === updatedTache.Id);
-    if (index !== -1) {
-      this.tasks[index] = updatedTache;
-      this.saveTaches(); // Sauvegarder les tâches après mise à jour
+  
+  updateTask(updatedTask: Task): void {
+    // Vérifiez si la tâche existe
+    const index = this.tasks.findIndex(task => task.Id === updatedTask.Id);
+  
+    if (index === -1) {
+      console.error('Task not found');
+      return; // Ou gérer l'erreur de manière appropriée
     }
+  
+    // Utilisez map pour créer un nouveau tableau avec la tâche mise à jour
+    this.tasks = this.tasks.map(task =>
+      task.Id === updatedTask.Id ? updatedTask : task
+    );
+  
+    // Sauvegardez les tâches mises à jour
+    this.saveTaches();
   }
+  
 }

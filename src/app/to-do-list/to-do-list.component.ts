@@ -9,7 +9,7 @@ import { Task } from '../shared/interface/task';
 })
 export class ToDoListComponent {
   Tasks: Task[] = [];
-  selectedTask: Task | null = null;
+  selectedTask!: Task;
   //titleaction:string='';
   isModalOpen = false;
 
@@ -25,7 +25,7 @@ export class ToDoListComponent {
 
   toggleCompletion(tache: Task): void {
     tache.completed = !tache.completed; 
-    this.taskService.updateTache(tache); 
+    
     this.loadTasks(); 
   }
 
@@ -47,6 +47,7 @@ export class ToDoListComponent {
   }
 
   openModal(): void {
+    
   
     this.isModalOpen = true;
   }
