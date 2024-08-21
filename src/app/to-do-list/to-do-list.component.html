@@ -1,26 +1,42 @@
-
-<section class="relative min-h-screen flex items-center justify-center p-4 bg-gray-100 overflow-hidden">
+<div class="h-screen" style="background-image: url('https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcSrFpoQ9RiAXizRsB6hxYTIRxe8qvGgWp9m6Fn8RCOA8-iGsHeT'); background-size: cover; background-position: center; background-repeat: no-repeat;">
+  <section class="relative min-h-screen flex items-center justify-center p-4 bg-gray-100 bg-opacity-50 overflow-hidden">
     <div class="relative flex flex-col md:flex-row bg-white rounded-2xl shadow-lg max-w-7xl w-full h-auto md:h-[85vh] overflow-hidden">
-  
-     
-      <div class="relative hidden md:block md:w-1/6 bg-[#D3D3D3] h-full p-4">
-    
+      <div class="relative hidden md:block md:w-1/6 bg-[#d3d3d3] h-full p-4">
+       
         <div class="flex items-center gap-2 mb-4">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 text-gray-700">
             <path d="M3 6h18v2H3V6zm0 4h18v2H3v-2zm0 4h18v2H3v-2z"></path>
           </svg>
           <h2 class="text-xl font-semibold text-gray-700">Todolist</h2>
         </div>
-        
-     
-        <div class="mr-16">
+        <div class="mr-9">
           <app-add-task></app-add-task>
         </div>
-      </div>
-  
-     
-      <div class="flex flex-col w-full md:w-5/6 px-4 md:px-8 py-8 bg-gray-50">
+        <div class="mt-20">
+          Priority:
+        </div>
        
+          <div class="flex items-center">
+            <div class="w-4 h-4 rounded-full bg-green-500 inline-block"></div>
+            <span class="ml-2 text-gray-700">Low</span>
+          </div>
+          
+          <!-- Medium Priority -->
+          <div class="flex items-center">
+            <div class="w-4 h-4 rounded-full bg-yellow-500 inline-block"></div>
+            <span class="ml-2 text-gray-700">Medium</span>
+          </div>
+          
+          <!-- High Priority -->
+          <div class="flex items-center">
+            <div class="w-4 h-4 rounded-full bg-red-500 inline-block"></div>
+            <span class="ml-2 text-gray-700">High</span>
+          </div>
+      
+        
+        
+      </div>
+      <div class="flex flex-col w-full md:w-5/6 px-4 md:px-8 py-8 bg-gray-50">
         <div class="overflow-x-auto">
           <table class="min-w-full bg-white border border-gray-200">
             <thead class="bg-gray-200 text-gray-800">
@@ -58,15 +74,12 @@
                     <button class="text-blue-500 hover:text-blue-700" (click)="openModal()" aria-label="Edit Task">
                       <i class="fas fa-edit"></i>
                     </button>
-                    
-                    <button 
-            (click)="deleteTache(i)"
-            class="px-3 py-1 text-red-600 hover:bg-red-100 rounded focus:outline-none focus:ring-2 focus:ring-red-500 ml-2"
-          >
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-            </svg>
-          </button>
+                    <button (click)="deleteTache(i)" class="px-3 py-1 text-red-600 hover:bg-red-100 rounded focus:outline-none focus:ring-2 focus:ring-red-500 ml-2">
+                      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 11V17M15 11V17M3 6h18M4 6l1 14h14l1-14H4z"></path>
+                      </svg>
+                      
+                    </button>
                   </div>
                 </td>
               </tr>
@@ -76,7 +89,7 @@
       </div>
     </div>
   </section>
+</div>
+<app-edit-task *ngIf="isModalOpen && selectedTask" (closeModal)="closeModal()"></app-edit-task>
 
-  
-  <app-edit-task *ngIf="isModalOpen && selectedTask"  (closeModal)="closeModal()"></app-edit-task>
   <!-- <app-edit-task *ngIf="isModalOpen && selectedTask"  (closeModal)="closeModal()"></app-edit-task>-->
