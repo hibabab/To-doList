@@ -10,6 +10,8 @@ import { TacheService } from '../../shared/services/tache.service';
 export class AddTachComponent {
   tache={} as Tache;
   isModalOpen = false;
+  today: string = new Date().toISOString().split('T')[0];
+
 
   toggleModal() {
     this.isModalOpen = !this.isModalOpen;

@@ -49,11 +49,16 @@ export class TacheService {
 
   toggleCompletion(id: number): void {
     const index = this.taches.findIndex(tache => tache.Id === id);
-    if (index !== -1) {
-      this.taches[index].completed = !this.taches[index].completed;
-      this.saveTaches(); // Sauvegarder les tâches après changement de statut
-    }
+  
+    
+  
+   
+    this.taches[index].completed = !this.taches[index].completed;
+  
+    // Sauvegarder les tâches après changement de statut
+    this.saveTaches();
   }
+  
 
   // Méthode pour mettre à jour une tâche
   updateTache(updatedTache: Tache): void {

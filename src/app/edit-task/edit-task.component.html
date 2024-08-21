@@ -1,40 +1,75 @@
 <div class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-    <div class="bg-white p-6 rounded-lg shadow-lg w-11/12 md:w-1/3 max-w-lg">
+  <div class="bg-white p-6 rounded-lg shadow-lg w-11/12 md:w-1/3 max-w-lg">
       <h2 class="text-xl font-bold mb-4">Modifier la Demande</h2>
-      <form >
-        <div class="mb-4">
-          <label for="Title" class="block mb-2 text-sm font-medium text-gray-900">Titre</label>
-          <input type="text" name="Title" [(ngModel)]="tache.Title" id="Title" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" required>
-        </div>
-        <div class="mb-4">
-          <label for="Description" class="block mb-2 text-sm font-medium text-gray-900">Description</label>
-          <textarea name="Description" [(ngModel)]="tache.Description" id="Description" rows="3" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-600 focus:border-primary-600" placeholder="Description de la tâche" required></textarea>
-        </div>
-        <div class="mb-4">
-          <label for="StartDate" class="block mb-2 text-sm font-medium text-gray-900">Date de Début</label>
-          <input type="date" name="StartDate" [(ngModel)]="tache.StartDate" id="StartDate" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" required>
-        </div>
-        <div class="mb-4">
-          <label for="Deadline" class="block mb-2 text-sm font-medium text-gray-900">Date de Fin</label>
-          <input type="date" name="Deadline" [(ngModel)]="tache.Deadline" id="Deadline" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" required>
-        </div>
-        <div class="mb-4">
-          <label for="Priority" class="block mb-2 text-sm font-medium text-gray-900">Priorité</label>
-          <select name="Priority" [(ngModel)]="tache.priority" id="Priority" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5">
-            <option value="High">Haute</option>
-            <option value="Medium">Moyenne</option>
-            <option value="Low">Basse</option>
-          </select>
-        </div>
-        <div class="mb-4">
-          <label for="completed" class="block mb-2 text-sm font-medium text-gray-900">Terminée</label>
-          <input type="checkbox" name="completed" [(ngModel)]="tache.completed" id="completed" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600">
-        </div>
-        <div class="flex justify-end space-x-2">
-          <button type="submit"  (click)="onEdit()" class="bg-green-500 text-white font-bold py-2 px-4 rounded hover:bg-green-700 transition ease-in-out duration-150">Enregistrer</button>
-          <button type="button" (click)="onClose()" class="bg-red-500 text-white font-bold py-2 px-4 rounded hover:bg-red-700 transition ease-in-out duration-150">Fermer</button>
-        </div>
+      <form (ngSubmit)="onEdit()" #taskForm="ngForm">
+          <!-- Titre -->
+          <div class="mb-4">
+              <label for="Title" class="block mb-2 text-sm font-medium text-gray-900">Titre</label>
+              <input type="text" name="Title" [(ngModel)]="tache.Title" id="Title"
+                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
+                  required #title="ngModel">
+              <div class="text-red-500 mt-1" *ngIf="title.touched && !title.valid">
+                  <div *ngIf="title.hasError('required')">Veuillez saisir un titre.</div>
+              </div>
+          </div>
+
+          <!-- Description -->
+          <div class="mb-4">
+              <label for="Description" class="block mb-2 text-sm font-medium text-gray-900">Description</label>
+              <textarea name="Description" [(ngModel)]="tache.Description" id="Description" rows="3"
+                  class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-600 focus:border-primary-600"
+                  placeholder="Description de la tâche" required #description="ngModel"></textarea>
+              <div class="text-red-500 mt-1" *ngIf="description.touched && !description.valid">
+                  <div *ngIf="description.hasError('required')">Veuillez saisir une description.</div>
+              </div>
+          </div>
+
+          <!-- Date de Début -->
+          <div class="mb-4">
+              <label for="StartDate" class="block mb-2 text-sm font-medium text-gray-900">Date de Début</label>
+              <input type="date" name="StartDate" [(ngModel)]="tache.StartDate" id="StartDate"
+                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
+                  required [min]="today" #startDate="ngModel">
+              <div class="text-red-500 mt-1" *ngIf="startDate.touched && !startDate.valid">
+                  <div *ngIf="startDate.hasError('required')">Veuillez sélectionner une date de début.</div>
+                  <div *ngIf="startDate.hasError('min')">La date de début ne peut pas être dans le passé.</div>
+              </div>
+          </div>
+
+          <!-- Date de Fin -->
+          <div class="mb-4">
+              <label for="Deadline" class="block mb-2 text-sm font-medium text-gray-900">Date de Fin</label>
+              <input type="date" name="Deadline" [(ngModel)]="tache.Deadline" id="Deadline"
+                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
+                  required [min]="tache.StartDate" #deadline="ngModel">
+              <div class="text-red-500 mt-1" *ngIf="deadline.touched && !deadline.valid">
+                  <div *ngIf="deadline.hasError('required')">Veuillez sélectionner une date de fin.</div>
+                  <div *ngIf="deadline.hasError('min')">La date de fin doit être après la date de début.</div>
+              </div>
+          </div>
+
+          <!-- Priorité -->
+          <div class="mb-4">
+              <label for="Priority" class="block mb-2 text-sm font-medium text-gray-900">Priorité</label>
+              <select name="Priority" [(ngModel)]="tache.priority" id="Priority"
+                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
+                  required #priority="ngModel">
+                  <option value="High">Haute</option>
+                  <option value="Medium">Moyenne</option>
+                  <option value="Low">Basse</option>
+              </select>
+              <div class="text-red-500 mt-1" *ngIf="priority.touched && !priority.valid">
+                  <div *ngIf="priority.hasError('required')">Veuillez sélectionner une priorité.</div>
+              </div>
+          </div>
+
+          
+
+          <!-- Boutons -->
+          <div class="flex justify-end space-x-2">
+              <button type="submit" class="bg-[#62895B] text-white font-bold py-2 px-4 rounded hover:bg-[#46613F] transition ease-in-out duration-150" [disabled]="!taskForm.valid">Enregistrer</button>
+              <button type="button" (click)="onClose()" class="bg-red-500 text-white font-bold py-2 px-4 rounded hover:bg-red-700 transition ease-in-out duration-150">Fermer</button>
+          </div>
       </form>
-    </div>
   </div>
-  
+</div>

@@ -7,8 +7,8 @@ import { ListTacheComponent } from './list-tache/list-tache.component';
 
 import { FormsModule } from '@angular/forms';
 import { EditTaskComponent } from './edit-task/edit-task.component';
-import { NavbarComponent } from './navbar/navbar.component';
 import { AddTachComponent } from './add-tach/add-tach.component';
+
 
 @NgModule({
   declarations: [
@@ -16,8 +16,9 @@ import { AddTachComponent } from './add-tach/add-tach.component';
     ListTacheComponent,
     
     EditTaskComponent,
-    NavbarComponent,
-    AddTachComponent
+    
+    AddTachComponent,
+  
   ],
   imports: [
     BrowserModule,

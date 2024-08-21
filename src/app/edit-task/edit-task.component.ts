@@ -5,11 +5,13 @@ import { TacheService } from '../../shared/services/tache.service';
 @Component({
   selector: 'app-edit-task',
   templateUrl: './edit-task.component.html',
-  styleUrls: ['./edit-task.component.css'] // Correction du nom de la clé
+  styleUrls: ['./edit-task.component.css'] 
 })
 export class EditTaskComponent {
+  today: string = new Date().toISOString().split('T')[0];
 
-   tache: Tache = {} as Tache; // Définition du type Tache pour plus de précision
+
+   tache: Tache = {} as Tache; 
    @Output() closeModal = new EventEmitter<void>();
    @Input()
   tachee!: Tache;

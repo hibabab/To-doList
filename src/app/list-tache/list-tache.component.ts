@@ -23,7 +23,7 @@ export class ListTacheComponent implements OnInit {
   }
 
   toggleCompletion(tache: Tache): void {
-    this.tacheService.toggleCompletion(tache.Id);
+   
     this.loadTasks(); // Recharger les tâches pour mettre à jour l'affichage
   }
 

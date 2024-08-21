@@ -1,26 +1,26 @@
-<body class="min-h-screen" style="background-image: url('https://fr.freepik.com/vecteurs-libre/fond-peinture-vert-clair_43397970.htm'); background-size: cover; background-repeat: no-repeat; background-position: center;">
+<section class="relative min-h-screen flex items-center justify-center p-4 bg-gray-100 overflow-hidden">
+  <div class="relative flex flex-col md:flex-row bg-white rounded-2xl shadow-lg max-w-7xl w-full h-auto md:h-[85vh] overflow-hidden">
 
-  <section class="relative min-h-screen flex items-center justify-center p-4 bg-gray-100 overflow-hidden">
-    <div class="relative flex flex-col md:flex-row bg-white rounded-2xl shadow-lg max-w-7xl w-full h-auto md:h-[85vh] overflow-hidden">
-
-      <!-- Menu latéral pour grands écrans -->
-      <div class="relative hidden md:block md:w-1/6 bg-[#D3D3D3] h-full p-4">
-        <!-- Titre du menu latéral -->
-        <div class="flex items-center gap-2 mb-4">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 text-gray-700">
-            <path d="M3 6h18v2H3V6zm0 4h18v2H3v-2zm0 4h18v2H3v-2z"></path>
-          </svg>
-          <h2 class="text-xl font-semibold text-gray-700">Todolist</h2>
-        </div>
-        
-        <!-- Composant de gestion des tâches -->
-        <div class="mr-5">
-          <app-add-tach></app-add-tach>
-        </div>
+   
+    <div class="relative hidden md:block md:w-1/6 bg-[#D3D3D3] h-full p-4">
+      <!-- Titre du menu latéral -->
+      <div class="flex items-center gap-2 mb-4">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 text-gray-700">
+          <path d="M3 6h18v2H3V6zm0 4h18v2H3v-2zm0 4h18v2H3v-2z"></path>
+        </svg>
+        <h2 class="text-xl font-semibold text-gray-700">Todolist</h2>
       </div>
+      
+      <!-- Composant de gestion des tâches -->
+      <div class="mr-5">
+        <app-add-tach></app-add-tach>
+      </div>
+    </div>
 
-      <!-- Contenu principal du tableau -->
-      <div class="flex flex-col w-full md:w-5/6 px-4 md:px-8 py-8 bg-gray-50">
+    <!-- Contenu principal du tableau -->
+    <div class="flex flex-col w-full md:w-5/6 px-4 md:px-8 py-8 bg-gray-50">
+      <!-- Ajouter le défilement horizontal pour les petits écrans -->
+      <div class="overflow-x-auto">
         <table class="min-w-full bg-white border border-gray-200">
           <thead class="bg-gray-200 text-gray-800">
             <tr>
@@ -38,7 +38,7 @@
             <tr *ngFor="let tc of taches; let i = index;" class="text-gray-900">
               <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">{{ i + 1 }}</td>
               <td class="px-6 py-4 whitespace-nowrap text-sm">
-                <input class="form-checkbox h-4 w-4 text-blue-600 border-gray-300 focus:ring-blue-500" type="checkbox" [checked]="tc.completed" (change)="toggleCompletion(tc)" />
+                <input class="form-checkbox h-4 w-4 text-blue-600 border-gray-300 focus:ring-blue-500" type="checkbox" (change)="toggleCompletion(tc)" />
               </td>
               <td class="px-6 py-4 whitespace-nowrap text-sm">{{ tc.Title }}</td>
               <td class="px-6 py-4 whitespace-nowrap text-sm">{{ tc.Description }}</td>
@@ -67,6 +67,8 @@
         </table>
       </div>
     </div>
-  </section>
-</body>
+  </div>
+</section>
+
+<!-- Modal de modification -->
 <app-edit-task *ngIf="isModifierModalOpen && selectedTask" [tachee]="selectedTask" (closeModal)="closeModal()"></app-edit-task>
