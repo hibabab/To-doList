@@ -27,6 +27,10 @@ export class AddTaskComponent {
     console.log('Tâche ajoutée'); 
     this.toggleModal();  
   }
+
+
+
+isDateInPast(date: string): boolean {
+  return new Date(date) < new Date(this.today);
 }
-
-
+}

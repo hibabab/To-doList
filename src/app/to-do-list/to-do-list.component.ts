@@ -10,7 +10,8 @@ import { Task } from '../shared/interface/task';
 export class ToDoListComponent {
   Tasks: Task[] = [];
   selectedTask: Task | null = null;
-  isModifierModalOpen = false;
+  //titleaction:string='';
+  isModalOpen = false;
 
   constructor(private taskService: TaskService) {}
 
@@ -45,16 +46,22 @@ export class ToDoListComponent {
     });
   }
 
-  openModifierModal(): void {
-     // Crée une copie pour éviter les modifications directes
-    this.isModifierModalOpen = true;
+  openModal(): void {
+  
+    this.isModalOpen = true;
   }
 
   closeModal(): void {
-    this.isModifierModalOpen = false;
+    this.isModalOpen = false;
    
   }
 }
 
 
 
+/*
+/*openModal(task: Tache | null): void {
+  this.selectedTask = task;
+  this.titleaction = task ? 'Edit Task' : 'Add Task';
+  this.isModifierModalOpen = true;
+}*/

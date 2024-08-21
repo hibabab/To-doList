@@ -11,6 +11,7 @@ import { Task } from '../shared/interface/task';
 })
 export class EditTaskComponent {
   today: string = new Date().toISOString().split('T')[0];
+  TitleAction: string='';
 
 
   Task: Task= {} as Task; 
@@ -33,6 +34,5 @@ tasks: any;
 
   
   }
-
 
 }

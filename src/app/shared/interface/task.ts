@@ -2,8 +2,8 @@ export interface Task {
     Id: number;
     Title: string;
     Description: string;
-    StartDate: Date;
-    Deadline: Date;
+    StartDate: string;
+    Deadline: string;
     priority: Priority;
     completed:boolean
   
