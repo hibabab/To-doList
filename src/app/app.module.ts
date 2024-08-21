@@ -8,12 +8,13 @@ import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
 
 
-import { EditAddTaskComponent } from './edit-add-task/edit-add-task.component';
 
-import { AddTaskComponent } from './add-task/add-task.component';
+
+
 
 import { ToDoListComponent } from './to-do-list/to-do-list.component';
-import { EditTasksComponent } from './edit-tasks/edit-tasks.component';
+import { AddTasksComponent } from './add-tasks/add-tasks.component';
+
 
 
 
@@ -26,11 +27,12 @@ import { EditTasksComponent } from './edit-tasks/edit-tasks.component';
     
    
     
-      EditAddTaskComponent,
      
-      AddTaskComponent,
+     
+      
       ToDoListComponent,
-      EditTasksComponent,
+      AddTasksComponent,
+     
       
   
   ],

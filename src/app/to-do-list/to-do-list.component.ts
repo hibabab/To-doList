@@ -20,14 +20,13 @@ export class ToDoListComponent {
   }
 
   loadTasks(): void {
-    this.Tasks = this.taskService.getTaches();
+    this.Tasks = this.taskService.getTasks();
   }
 
-  toggleCompletion(tache: Task): void {
-    tache.completed = !tache.completed; 
+  
     
-    this.loadTasks(); 
-  }
+
+    
 
   deleteTache(index: number): void {
     Swal.fire({
@@ -46,20 +45,10 @@ export class ToDoListComponent {
     });
   }
 
-  openModal(): void {
-    
   
-    this.isModalOpen = true;
-  }
 
-  closeModal(): void {
-    this.isModalOpen = false;
-   
-  }
+
 }
-
-
-
 /*
 /*openModal(task: Tache | null): void {
   this.selectedTask = task;

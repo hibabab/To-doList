@@ -27,58 +27,55 @@ export class TaskService {
     }
   }
 
-  private saveTaches(): void {
+  private saveTasks(): void {
     if (this.isBrowser()) {
       localStorage.setItem(this.localStorageKey, JSON.stringify(this.tasks));
     }
   }
 
-  getTaches(): Task[] {
+  getTasks(): Task[] {
     
     return this.tasks;
   }
 
-  addTache(tache: Task): void {
-    this.tasks.push(tache);
-    this.saveTaches();
+  addTask(task: Task): void {
+    this.tasks.push(task);
+    this.saveTasks();
+    const tasks = this.getTasks();
    
   }
 
   deleteTache(id: number): void {
     this.tasks.splice(id,1);
-    this.saveTaches(); // Sauvegarder les tâches après suppression
+    this.saveTasks(); // Sauvegarder les tâches après suppression
   }
 
   toggleCompletion(id: number): void {
-    const index = this.tasks.findIndex(tasks => tasks.Id === id);
-  
+    const tasks = this.getTasks();
+    const index = tasks.findIndex(task => task.Id === id);
     
-  
-   
-    this.tasks[index].completed = !this.tasks[index].completed;
-  
-   
-    this.saveTaches();
+    if (index !== -1) {
+      tasks[index].completed = !tasks[index].completed;
+      this.saveTasks();
+    }
   }
   
-
-  
   updateTask(updatedTask: Task): void {
-    // Vérifiez si la tâche existe
+   
     const index = this.tasks.findIndex(task => task.Id === updatedTask.Id);
   
     if (index === -1) {
       console.error('Task not found');
-      return; // Ou gérer l'erreur de manière appropriée
+      return; 
     }
   
-    // Utilisez map pour créer un nouveau tableau avec la tâche mise à jour
+    
     this.tasks = this.tasks.map(task =>
       task.Id === updatedTask.Id ? updatedTask : task
     );
   
-    // Sauvegardez les tâches mises à jour
-    this.saveTaches();
+    
+    this.saveTasks();
   }
   
 }
