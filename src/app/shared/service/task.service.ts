@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
-import { Tache } from '../interface/tache';
+import { Task } from '../interface/task';
 
 @Injectable({
   providedIn: 'root'
 })
-export class TacheService {
+export class TaskService {
 
+  
   private localStorageKey = 'taches'; // Clé pour le localStorage
-  taches: Tache[] = [];
+  tasks: Task[] = [];
 
   constructor() {
     if (this.isBrowser()) {
@@ -22,38 +23,39 @@ export class TacheService {
   private loadTaches(): void {
     if (this.isBrowser()) {
       const tachesJson = localStorage.getItem(this.localStorageKey);
-      this.taches = tachesJson ? JSON.parse(tachesJson) : [];
+      this.tasks = tachesJson ? JSON.parse(tachesJson) : [];
     }
   }
 
   private saveTaches(): void {
     if (this.isBrowser()) {
-      localStorage.setItem(this.localStorageKey, JSON.stringify(this.taches));
+      localStorage.setItem(this.localStorageKey, JSON.stringify(this.tasks));
     }
   }
 
-  getTaches(): Tache[] {
-    console.table(this.taches);
-    return this.taches;
+  getTaches(): Task[] {
+    
+    return this.tasks;
   }
 
-  addTache(tache: Tache): void {
-    this.taches.push(tache);
-    this.saveTaches(); // Sauvegarder les tâches dans le localStorage
+  addTache(tache: Task): void {
+    this.tasks.push(tache);
+    this.saveTaches();
+   
   }
 
   deleteTache(id: number): void {
-    this.taches = this.taches.filter(tache => tache.Id !== id); // Utiliser filter pour la suppression
+    this.tasks.splice(id,1);
     this.saveTaches(); // Sauvegarder les tâches après suppression
   }
 
   toggleCompletion(id: number): void {
-    const index = this.taches.findIndex(tache => tache.Id === id);
+    const index = this.tasks.findIndex(tasks => tasks.Id === id);
   
     
   
    
-    this.taches[index].completed = !this.taches[index].completed;
+    this.tasks[index].completed = !this.tasks[index].completed;
   
     // Sauvegarder les tâches après changement de statut
     this.saveTaches();
@@ -61,10 +63,10 @@ export class TacheService {
   
 
   // Méthode pour mettre à jour une tâche
-  updateTache(updatedTache: Tache): void {
-    const index = this.taches.findIndex(tache => tache.Id === updatedTache.Id);
+  updateTache(updatedTache: Task): void {
+    const index = this.tasks.findIndex(tache => tache.Id === updatedTache.Id);
     if (index !== -1) {
-      this.taches[index] = updatedTache;
+      this.tasks[index] = updatedTache;
       this.saveTaches(); // Sauvegarder les tâches après mise à jour
     }
   }

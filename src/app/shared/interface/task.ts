@@ -1,4 +1,4 @@
-export interface Tache {
+export interface Task {
     Id: number;
     Title: string;
     Description: string;
@@ -14,4 +14,4 @@ export enum Priority {
     Medium = 'Medium',
     Low = 'Low'
   }
-  
+

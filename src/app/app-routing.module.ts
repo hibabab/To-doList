@@ -1,11 +1,14 @@
 import { NgModule, Component } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ListTacheComponent } from './list-tache/list-tache.component';
-import { EditTaskComponent } from './edit-task/edit-task.component';
+
+import { ToDoListComponent } from './to-do-list/to-do-list.component';
+
+
 
 
 const routes: Routes = [
-  {path:"",component:ListTacheComponent},
+
+  {path:"",component:ToDoListComponent}
  
   
 ];

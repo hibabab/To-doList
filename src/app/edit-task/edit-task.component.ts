@@ -1,6 +1,8 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { Tache } from '../../shared/interface/tache'; // Assurez-vous que le chemin est correct
-import { TacheService } from '../../shared/services/tache.service';
+
+
+import { TaskService } from '../shared/service/task.service';
+import { Task } from '../shared/interface/task';
 
 @Component({
   selector: 'app-edit-task',
@@ -11,11 +13,11 @@ export class EditTaskComponent {
   today: string = new Date().toISOString().split('T')[0];
 
 
-   tache: Tache = {} as Tache; 
+  Task: Task= {} as Task; 
    @Output() closeModal = new EventEmitter<void>();
-   @Input()
-  tachee!: Tache;
-   constructor(private tacheService: TacheService) {}
+   
+tasks: any;
+   constructor(private TaskService: TaskService) {}
  
    
 
@@ -23,9 +25,9 @@ export class EditTaskComponent {
      this.closeModal.emit();
    }
    onEdit(): void {
-    if (this.tachee) {
-      this.tacheService.updateTache(this.tachee);
-      // Fermer le modal ou rediriger l'utilisateur après la mise à jour
+    if (this.Task) {
+      this. TaskService.updateTache(this.Task);
+      
     }
    
 
