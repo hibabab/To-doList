@@ -1,70 +1,72 @@
-<section class="vh-100 gradient-custom-2">
-  <div class="container py-5 h-100">
-    <div class="row d-flex justify-content-center align-items-center h-100">
-      <app-add-tache></app-add-tache>
-      <div class="col-md-12 col-xl-10">
-        <div class="card mask-custom">
-          <div class="card-body p-4 text-white">
-            <div class="text-center pt-3 pb-2">
-              <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-todo-list/check1.webp" alt="Check" class="icon-small" loading="lazy">
-              <h2 class="my-4 title-small">Task List</h2>
-            </div>
-            <!-- Tableau des tâches -->
-            <table class="table table-custom mb-0">
-              <thead class="bg-custom text-white">
-                <tr>
-                  <th scope="col">#</th>
-                  <th scope="col">Completed</th>
-                  <th scope="col">Title</th>
-                  <th scope="col">Description</th>
-                  <th scope="col">Start Date</th>
-                  <th scope="col">Deadline</th>
-                  <th scope="col">Priority</th>
-                  <th scope="col">Action</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr *ngFor="let tc of taches; let i = index;" class="fw-normal">
-                  <th scope="row">
-                    <span class="ms-2">{{ i + 1 }}</span>
-                  </th>
-                  <td class="align-middle">
-                    <input 
-                      class="form-check-input" 
-                      type="checkbox" 
-                      [checked]="tc.completed"
-                      (change)="toggleCompletion(tc)" />
-                  </td>
-                  <td class="align-middle">{{ tc.Title }}</td>
-                  <td class="align-middle">{{ tc.Description }}</td>
-                  <td class="align-middle">{{ tc.StartDate | date: 'short' }}</td>
-                  <td class="align-middle">{{ tc.Deadline | date: 'short' }}</td>
-                  <td class="align-middle">
-                    <h6 class="mb-0">
-                      <span [ngClass]="{
-                        'badge': true,
-                        'bg-danger': tc.priority === 'High',
-                        'bg-warning': tc.priority === 'Medium',
-                        'bg-success': tc.priority === 'Low'
-                      }">{{ tc.priority }}</span>
-                    </h6>
-                  </td>
-                  <td class="align-middle">
-                    <div class="btn-group">
-                      <button class="btn btn-link btn-edit" aria-label="Edit Task">
-                        <i class="fas fa-edit"></i>
-                      </button>
-                      <button class="btn btn-link btn-delete" (click)="deleteTache(i)" aria-label="Delete Task">
-                        <i class="fas fa-trash"></i>
-                      </button>
-                    </div>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+<body class="min-h-screen" style="background-image: url('https://fr.freepik.com/vecteurs-libre/fond-peinture-vert-clair_43397970.htm'); background-size: cover; background-repeat: no-repeat; background-position: center;">
+
+  <section class="relative min-h-screen flex items-center justify-center p-4 bg-gray-100 overflow-hidden">
+    <div class="relative flex flex-col md:flex-row bg-white rounded-2xl shadow-lg max-w-7xl w-full h-auto md:h-[85vh] overflow-hidden">
+
+      <!-- Menu latéral pour grands écrans -->
+      <div class="relative hidden md:block md:w-1/6 bg-[#D3D3D3] h-full p-4">
+        <!-- Titre du menu latéral -->
+        <div class="flex items-center gap-2 mb-4">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 text-gray-700">
+            <path d="M3 6h18v2H3V6zm0 4h18v2H3v-2zm0 4h18v2H3v-2z"></path>
+          </svg>
+          <h2 class="text-xl font-semibold text-gray-700">Todolist</h2>
+        </div>
+        
+        <!-- Composant de gestion des tâches -->
+        <div class="mr-5">
+          <app-add-tach></app-add-tach>
         </div>
       </div>
+
+      <!-- Contenu principal du tableau -->
+      <div class="flex flex-col w-full md:w-5/6 px-4 md:px-8 py-8 bg-gray-50">
+        <table class="min-w-full bg-white border border-gray-200">
+          <thead class="bg-gray-200 text-gray-800">
+            <tr>
+              <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">#</th>
+              <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Completed</th>
+              <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Title</th>
+              <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Description</th>
+              <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Start Date</th>
+              <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Deadline</th>
+              <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Priority</th>
+              <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Action</th>
+            </tr>
+          </thead>
+          <tbody class="bg-gray-50 divide-y divide-gray-200">
+            <tr *ngFor="let tc of taches; let i = index;" class="text-gray-900">
+              <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">{{ i + 1 }}</td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm">
+                <input class="form-checkbox h-4 w-4 text-blue-600 border-gray-300 focus:ring-blue-500" type="checkbox" [checked]="tc.completed" (change)="toggleCompletion(tc)" />
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm">{{ tc.Title }}</td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm">{{ tc.Description }}</td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm">{{ tc.StartDate | date: 'short' }}</td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm">{{ tc.Deadline | date: 'short' }}</td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm">
+                <span [ngClass]="{
+                  'inline-block px-2 py-1 text-xs font-semibold rounded-full text-white': true,
+                  'bg-red-500': tc.priority === 'High',
+                  'bg-yellow-500': tc.priority === 'Medium',
+                  'bg-green-500': tc.priority === 'Low'
+                }">{{ tc.priority }}</span>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm">
+                <div class="flex space-x-2">
+                  <button class="text-blue-500 hover:text-blue-700" (click)="openModifierModal(tc)" aria-label="Edit Task">
+                    <i class="fas fa-edit"></i>
+                  </button>
+                  <button class="text-red-500 hover:text-red-700" (click)="deleteTache(i)" aria-label="Delete Task">
+                    <i class="fas fa-trash"></i>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
-  </div>
-</section>
+  </section>
+</body>
+<app-edit-task *ngIf="isModifierModalOpen && selectedTask" [tachee]="selectedTask" (closeModal)="closeModal()"></app-edit-task>

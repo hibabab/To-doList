@@ -40,21 +40,11 @@ export class TacheService {
   addTache(tache: Tache): void {
     this.taches.push(tache);
     this.saveTaches(); // Sauvegarder les tâches dans le localStorage
-   
   }
 
   deleteTache(id: number): void {
-    this.taches.splice(id,1);
+    this.taches = this.taches.filter(tache => tache.Id !== id); // Utiliser filter pour la suppression
     this.saveTaches(); // Sauvegarder les tâches après suppression
-  }
-
-  editTache(id: number, updatedTache: Tache): void {
-    const index = this.taches.findIndex(tache => tache.Id === id);
-    if (index !== -1) {
-      this.taches[index] = updatedTache;
-      this.saveTaches(); // Sauvegarder les tâches après modification
-     
-    }
   }
 
   toggleCompletion(id: number): void {
@@ -62,6 +52,15 @@ export class TacheService {
     if (index !== -1) {
       this.taches[index].completed = !this.taches[index].completed;
       this.saveTaches(); // Sauvegarder les tâches après changement de statut
+    }
+  }
+
+  // Méthode pour mettre à jour une tâche
+  updateTache(updatedTache: Tache): void {
+    const index = this.taches.findIndex(tache => tache.Id === updatedTache.Id);
+    if (index !== -1) {
+      this.taches[index] = updatedTache;
+      this.saveTaches(); // Sauvegarder les tâches après mise à jour
     }
   }
 }

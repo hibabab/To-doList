@@ -10,10 +10,25 @@ import { TacheService } from '../../shared/services/tache.service';
 export class EditTaskComponent {
 
    tache: Tache = {} as Tache; // Définition du type Tache pour plus de précision
+   @Output() closeModal = new EventEmitter<void>();
+   @Input()
+  tachee!: Tache;
+   constructor(private tacheService: TacheService) {}
  
- 
+   
+
+   onClose() {
+     this.closeModal.emit();
+   }
+   onEdit(): void {
+    if (this.tachee) {
+      this.tacheService.updateTache(this.tachee);
+      // Fermer le modal ou rediriger l'utilisateur après la mise à jour
+    }
+   
 
   
   }
 
 
+}

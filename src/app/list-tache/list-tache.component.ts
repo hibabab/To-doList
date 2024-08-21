@@ -9,6 +9,8 @@ import { TacheService } from '../../shared/services/tache.service';
 })
 export class ListTacheComponent implements OnInit {
   taches: Tache[] = [];
+  selectedTask: Tache | null = null;
+  isModifierModalOpen = false;
 
   constructor(private tacheService: TacheService) {}
 
@@ -25,10 +27,21 @@ export class ListTacheComponent implements OnInit {
     this.loadTasks(); // Recharger les tâches pour mettre à jour l'affichage
   }
 
-  deleteTache(id: number): void {
+  deleteTache(index: number): void {
+    const tacheId = this.taches[index].Id;
     if (confirm('Vous voulez supprimer la tâche ?')) {
-      this.tacheService.deleteTache(id);
+      this.tacheService.deleteTache(tacheId);
       this.loadTasks();
     }
+  }
+
+  openModifierModal(task: Tache): void {
+    this.selectedTask = { ...task }; // Crée une copie pour éviter les modifications directes
+    this.isModifierModalOpen = true;
+  }
+
+  closeModal(): void {
+    this.isModifierModalOpen = false;
+    this.selectedTask = null; // Réinitialise la tâche sélectionnée
   }
 }
