@@ -5,14 +5,16 @@ import { Task } from '../interface/task';
   providedIn: 'root'
 })
 export class TaskService {
+  private tasksStorageKey = 'tasks'; // Key used to store tasks in localStorage
+  private completedTasksStorageKey = 'completedTasks'; // Key used to store completed tasks in localStorage
 
-  private localStorageKey = 'tasks'; // Key used to store tasks in localStorage
   tasks: Task[] = []; // Array to hold all tasks
   completedTasks: Task[] = []; // Array to hold completed tasks
 
   constructor() {
     if (this.isBrowser()) {
       this.loadTasks(); // Load tasks from localStorage on initialization
+      this.loadCompletedTasks(); // Load completed tasks from localStorage on initialization
     }
   }
 
@@ -24,7 +26,7 @@ export class TaskService {
   // Loads tasks from localStorage and initializes the tasks array
   private loadTasks(): void {
     if (this.isBrowser()) {
-      const tasksJson = localStorage.getItem(this.localStorageKey);
+      const tasksJson = localStorage.getItem(this.tasksStorageKey);
       if (tasksJson) {
         this.tasks = JSON.parse(tasksJson);
         console.log('Tasks loaded from localStorage:', this.tasks); // Debugging log
@@ -34,11 +36,24 @@ export class TaskService {
     }
   }
 
-  // Saves the tasks array to localStorage
+  // Loads completed tasks from localStorage and initializes the completedTasks array
+  private loadCompletedTasks(): void {
+    if (this.isBrowser()) {
+      const completedTasksJson = localStorage.getItem(this.completedTasksStorageKey);
+      if (completedTasksJson) {
+        this.completedTasks = JSON.parse(completedTasksJson);
+        console.log('Completed tasks loaded from localStorage:', this.completedTasks); // Debugging log
+      } else {
+        console.log('No completed tasks found in localStorage'); // Debugging log
+      }
+    }
+  }
+
+  // Saves the tasks and completed tasks arrays to localStorage
   private saveTasks(): void {
     if (this.isBrowser()) {
-      localStorage.setItem(this.localStorageKey, JSON.stringify(this.tasks));
-      console.log('Tasks saved to localStorage:', this.tasks); // Debugging log
+      localStorage.setItem(this.tasksStorageKey, JSON.stringify(this.tasks));
+      localStorage.setItem(this.completedTasksStorageKey, JSON.stringify(this.completedTasks));
     }
   }
 

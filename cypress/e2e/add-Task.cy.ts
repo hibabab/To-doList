@@ -3,8 +3,7 @@ describe('Add Task Modal', () => {
       // Visiter la page principale où le composant est affiché
       cy.visit('http://localhost:4200'); // Assurez-vous que le chemin correspond à votre route
   
-      // Réinitialiser le local storage avant chaque test si nécessaire
-      cy.clearLocalStorage();
+      
     });
   
     it('should open modal when "Add Task" button is clicked', () => {
