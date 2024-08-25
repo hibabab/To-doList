@@ -6,6 +6,7 @@ export interface Task {
     Deadline: string;
     priority: Priority;
     completed:boolean
+    completionDate:string
   
    
 }

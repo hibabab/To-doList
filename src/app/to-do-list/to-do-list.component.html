@@ -4,19 +4,22 @@
       
       <!-- Sidebar for larger screens -->
       <div class="relative hidden md:block md:w-1/6 bg-[#d3d3d3] h-full p-4">
+        <!-- Sidebar header with an icon and title -->
         <div class="flex items-center gap-2 mb-4">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 text-gray-700">
             <path d="M3 6h18v2H3V6zm0 4h18v2H3v-2zm0 4h18v2H3v-2z"></path>
           </svg>
           <h2 class="text-xl font-bold text-gray-700">Todolist</h2>
         </div>                       
+        <!-- Component for adding tasks -->
         <div class="mr-1">
           <app-add-tasks></app-add-tasks>
         </div>
+        <!-- Priority section -->
         <div class="mt-20 text-xl font-semibold text-gray-700">
           Priority:
         </div>
-        <!-- Priority indicators -->
+        <!-- Priority indicators for tasks -->
         <div class="flex items-center mt-2">
           <div class="w-4 h-4 rounded-full bg-green-500 inline-block"></div>
           <span class="ml-2 text-gray-700">Low</span>
@@ -34,10 +37,11 @@
       <!-- Main content area -->
       <div class="flex flex-col w-full md:w-5/6 px-4 md:px-8 py-8 bg-gray-50 overflow-x-auto">
         
-        <!-- Tasks In Progress -->
+        <!-- Tasks In Progress section -->
         <div class="mb-8">
           <h2 class="text-2xl font-semibold text-gray-800 mb-4">Tasks In Progress</h2>
           <table class="min-w-full bg-white border border-gray-200">
+            <!-- Table header -->
             <thead class="bg-gray-200 text-gray-800">
               <tr>
                 <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">#</th>
@@ -46,17 +50,18 @@
                 <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Description</th>
                 <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Start Date</th>
                 <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Deadline</th>
+                <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">CompletionDate</th>
                 <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Priority</th>
                 <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Action</th>
               </tr>
             </thead>
+            <!-- Table body with tasks -->
             <tbody class="bg-gray-50 divide-y divide-gray-200">
-              <tr *ngFor="let tc of Tasks ; let i = index;" 
-                  [ngClass]="{'completed-task': tc.completed}">
+              <tr *ngFor="let tc of Tasks ; let i = index;" [ngClass]="{'completed-task': tc.completed}">
                 <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">{{ i + 1 }}</td>
                 <td class="px-6 py-4 whitespace-nowrap text-sm">
                   <input 
-                    class="form-checkbox h-4 w-4 text-blue-600 border-gray-300 focus:ring-blue-500" 
+                    class="form-checkbox h-4 w-4 text-blue-600 border-gray-300 focus:ring-blue-500 ml-5" 
                     type="checkbox" 
                     [(ngModel)]="tc.completed"
                     (change)="toggleCompletion(i)" />
@@ -65,6 +70,7 @@
                 <td class="px-6 py-4 whitespace-nowrap text-sm">{{ tc.Description }}</td>
                 <td class="px-6 py-4 whitespace-nowrap text-sm">{{ tc.StartDate }}</td>
                 <td class="px-6 py-4 whitespace-nowrap text-sm">{{ tc.Deadline }}</td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm ml-8"> ---------</td>
                 <td class="px-6 py-4 whitespace-nowrap text-sm">
                   <span [ngClass]="{
                     'inline-block px-2 py-1 text-xs font-semibold rounded-full text-white': true,
@@ -85,10 +91,11 @@
           </table>
         </div>
         
-        <!-- Completed Tasks -->
+        <!-- Completed Tasks section -->
         <div>
           <h2 class="text-2xl font-semibold text-gray-800 mb-4">Completed Tasks</h2>
           <table class="min-w-full bg-white border border-gray-200">
+            <!-- Table header -->
             <thead class="bg-gray-200 text-gray-800">
               <tr>
                 <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">#</th>
@@ -97,25 +104,27 @@
                 <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Description</th>
                 <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Start Date</th>
                 <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Deadline</th>
+                <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">CompletionDate</th>
                 <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Priority</th>
                 <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Action</th>
               </tr>
             </thead>
+            <!-- Table body with completed tasks -->
             <tbody class="bg-gray-50 divide-y divide-gray-200">
               <tr *ngFor="let tc of completedtasks; let i = index;">
                 <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">{{ i + 1 }}</td>
                 <td class="px-6 py-4 whitespace-nowrap text-sm">
                   <input 
-                    class="form-checkbox h-4 w-4 text-blue-600 border-gray-300 focus:ring-blue-500" 
+                    class="form-checkbox h-4 w-4 text-blue-600 border-gray-300 focus:ring-blue-500 ml-5" 
                     type="checkbox" 
                     [(ngModel)]="tc.completed"
-                    (change)="NotCompetedTask(i)"
-                     />
+                    (change)="NotCompetedTask(i)" />
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap text-sm">{{ tc.Title }}</td>
                 <td class="px-6 py-4 whitespace-nowrap text-sm">{{ tc.Description }}</td>
                 <td class="px-6 py-4 whitespace-nowrap text-sm">{{ tc.StartDate }}</td>
                 <td class="px-6 py-4 whitespace-nowrap text-sm">{{ tc.Deadline }}</td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm ml-8">{{tc.completionDate}}</td>
                 <td class="px-6 py-4 whitespace-nowrap text-sm">
                   <span [ngClass]="{
                     'inline-block px-2 py-1 text-xs font-semibold rounded-full text-white': true,

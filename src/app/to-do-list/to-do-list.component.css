@@ -1,7 +1,25 @@
+table {
+  border-collapse: collapse; /* Assure que les bordures ne se doublent pas */
+  width: 100%;
+}
 
+thead th, tbody td {
+  text-align: left;
+  padding: 0.75rem;
+}
 
-.completed-task {
-    text-decoration: underline; /* Souligne la tâche complétée */
-    color: gray; /* Change la couleur du texte */
+thead th {
+  background-color: #f3f4f6; /* Une couleur de fond différente pour l'en-tête */
+}
+
+tbody td {
+  border-top: 1px solid #e5e7eb; /* Une bordure supérieure pour les lignes du corps */
+}
+thead th {
+    border-bottom: 2px solid #e5e7eb; /* Bordure inférieure pour les en-têtes */
+  }
+  
+  tbody tr:last-child td {
+    border-bottom: 2px solid #e5e7eb; /* Bordure inférieure pour la dernière ligne */
   }
   
