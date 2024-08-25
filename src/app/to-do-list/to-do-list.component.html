@@ -1,43 +1,38 @@
 <div class="h-screen" style="background-image: url('https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcSrFpoQ9RiAXizRsB6hxYTIRxe8qvGgWp9m6Fn8RCOA8-iGsHeT'); background-size: cover; background-position: center; background-repeat: no-repeat;">
   <section class="relative min-h-screen flex items-center justify-center p-4 bg-gray-100 bg-opacity-50 overflow-hidden">
     <div class="relative flex flex-col md:flex-row bg-white rounded-2xl shadow-lg max-w-7xl w-full h-auto md:h-[85vh] overflow-hidden">
+      
+      <!-- Sidebar for larger screens -->
       <div class="relative hidden md:block md:w-1/6 bg-[#d3d3d3] h-full p-4">
-       
         <div class="flex items-center gap-2 mb-4">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 text-gray-700">
             <path d="M3 6h18v2H3V6zm0 4h18v2H3v-2zm0 4h18v2H3v-2z"></path>
           </svg>
           <h2 class="text-xl font-bold text-gray-700">Todolist</h2>
-        </div>
+        </div>                       ***   
         <div class="mr-1">
-        <app-add-tasks></app-add-tasks>
+          <app-add-tasks></app-add-tasks>
         </div>
-        <div class="mt-20 ml-1  text-xl font-semibold text-gray-700">
+        <div class="mt-20 text-xl font-semibold text-gray-700">
           Priority:
         </div>
-        
-       
-          <div class="flex items-center">
-            <div class="w-4 h-4 rounded-full bg-green-500 inline-block"></div>
-            <span class="ml-2 text-gray-700">Low</span>
-          </div>
-          
-          <!-- Medium Priority -->
-          <div class="flex items-center">
-            <div class="w-4 h-4 rounded-full bg-yellow-500 inline-block"></div>
-            <span class="ml-2 text-gray-700">Medium</span>
-          </div>
-          
-          <!-- High Priority -->
-          <div class="flex items-center">
-            <div class="w-4 h-4 rounded-full bg-red-500 inline-block"></div>
-            <span class="ml-2 text-gray-700">High</span>
-          </div>
-      
-        
-        
+        <!-- Priority indicators -->
+        <div class="flex items-center mt-2">
+          <div class="w-4 h-4 rounded-full bg-green-500 inline-block"></div>
+          <span class="ml-2 text-gray-700">Low</span>
+        </div>
+        <div class="flex items-center mt-2">
+          <div class="w-4 h-4 rounded-full bg-yellow-500 inline-block"></div>
+          <span class="ml-2 text-gray-700">Medium</span>
+        </div>
+        <div class="flex items-center mt-2">
+          <div class="w-4 h-4 rounded-full bg-red-500 inline-block"></div>
+          <span class="ml-2 text-gray-700">High</span>
+        </div>
       </div>
-      <div class="flex flex-col w-full md:w-5/6 px-4 md:px-8 py-8 bg-gray-50">
+      
+      <!-- Main content area -->
+      <div class="flex flex-col w-full md:w-5/6 px-4 md:px-8 py-8 bg-gray-50 overflow-x-auto">
         <div class="overflow-x-auto">
           <table class="min-w-full bg-white border border-gray-200">
             <thead class="bg-gray-200 text-gray-800">
@@ -53,14 +48,12 @@
               </tr>
             </thead>
             <tbody class="bg-gray-50 divide-y divide-gray-200">
+              
               <tr *ngFor="let tc of Tasks; let i = index;" class="text-gray-900">
                 <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">{{ i + 1 }}</td>
-                <input
-                class="form-checkbox h-4 w-4 text-blue-600 border-gray-300 focus:ring-blue-500"
-                type="checkbox"
-                
-                
-              />
+                <td class="px-6 py-4 whitespace-nowrap text-sm">
+                  <input class="form-checkbox h-4 w-4 text-blue-600 border-gray-300 focus:ring-blue-500" type="checkbox" />
+                </td>
                 <td class="px-6 py-4 whitespace-nowrap text-sm">{{ tc.Title }}</td>
                 <td class="px-6 py-4 whitespace-nowrap text-sm">{{ tc.Description }}</td>
                 <td class="px-6 py-4 whitespace-nowrap text-sm">{{ tc.StartDate }}</td>
@@ -74,13 +67,11 @@
                   }">{{ tc.priority }}</span>
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap text-sm">
-                  <button (click)="deleteTache(i)" class="px-3 py-1 text-red-600 hover:bg-red-100 rounded focus:outline-none focus:ring-2 focus:ring-red-500 ml-2">
-                      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 11V17M15 11V17M3 6h18M4 6l1 14h14l1-14H4z"></path>
-                      </svg>
-                      
-                    </button>
-                 
+                  <button (click)="deleteTask(i)" class="px-3 py-1 text-red-600 hover:bg-red-100 rounded focus:outline-none focus:ring-2 focus:ring-red-500 ml-2">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 11V17M15 11V17M3 6h18M4 6l1 14h14l1-14H4z"></path>
+                    </svg>
+                  </button>
                 </td>
               </tr>
             </tbody>
@@ -90,5 +81,3 @@
     </div>
   </section>
 </div>
-
-  

@@ -28,7 +28,7 @@ export class ToDoListComponent {
 
     
 
-  deleteTache(index: number): void {
+  deleteTask(index: number): void {
     Swal.fire({
       title: 'Are you sure?',
       text: 'Do you want to delete this task permanently?',
@@ -38,7 +38,7 @@ export class ToDoListComponent {
       cancelButtonText: 'No, cancel'
     }).then((result) => {
       if (result.isConfirmed) {
-        this.taskService.deleteTache(index);
+        this.taskService.deleteTask(index);
         this.loadTasks(); // Recharger les tâches après suppression
         Swal.fire('Deleted!', 'The task has been deleted permanently.', 'success');
       }
@@ -49,9 +49,3 @@ export class ToDoListComponent {
 
 
 }
-/*
-/*openModal(task: Tache | null): void {
-  this.selectedTask = task;
-  this.titleaction = task ? 'Edit Task' : 'Add Task';
-  this.isModifierModalOpen = true;
-}*/

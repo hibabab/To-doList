@@ -14,4 +14,3 @@ export enum Priority {
     Medium = 'Medium',
     Low = 'Low'
   }
-
