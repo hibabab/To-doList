@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Pipe, PipeTransform } from '@angular/core';
 import Swal from 'sweetalert2'; 
 import { TaskService } from '../shared/service/task.service';
 import { Task } from '../shared/interface/task';
@@ -9,25 +9,22 @@ import { Task } from '../shared/interface/task';
 })
 export class ToDoListComponent {
   Tasks: Task[] = [];
-  selectedTask!: Task;
-  //titleaction:string='';
+  completedtasks: Task[] = [];
+  
+  
   isModalOpen = false;
 
   constructor(private taskService: TaskService) {}
 
   ngOnInit(): void {
-    this.loadTasks();
+    this.Tasks = this.taskService.getTasks();
+    this. completedtasks = this.taskService.getCompletedTasks();
   }
-
   loadTasks(): void {
     this.Tasks = this.taskService.getTasks();
   }
 
   
-    
-
-    
-
   deleteTask(index: number): void {
     Swal.fire({
       title: 'Are you sure?',
@@ -44,8 +41,14 @@ export class ToDoListComponent {
       }
     });
   }
-
-  
-
+  toggleCompletion(taskIndex: number): void {
+    this.taskService.toggleCompletion(taskIndex);
+    
+  }
+NotCompetedTask(taskIndex: number): void {
+  this.taskService.markAsNotCompleted(taskIndex)
+    
+}
 
 }
+

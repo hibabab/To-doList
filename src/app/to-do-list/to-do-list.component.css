@@ -1,0 +1,7 @@
+
+
+.completed-task {
+    text-decoration: underline; /* Souligne la tâche complétée */
+    color: gray; /* Change la couleur du texte */
+  }
+  

@@ -15,6 +15,7 @@ import { AddTasksComponent } from './add-tasks/add-tasks.component';
     AppComponent,
       ToDoListComponent,
       AddTasksComponent,
+      
      
   ],
   imports: [

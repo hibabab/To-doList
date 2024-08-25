@@ -8,6 +8,7 @@ export class TaskService {
 
   private localStorageKey = 'taches'; 
   tasks: Task[] = [];
+  completedTasks: Task[] = [];
 
   constructor() {
     if (this.isBrowser()) {
@@ -36,6 +37,9 @@ export class TaskService {
     return this.tasks;
   }
 
+  getCompletedTasks() {
+    return this.completedTasks;
+  }
   addTask(task: Task): void {
     this.tasks.push(task);
     this.saveTasks();
@@ -45,14 +49,20 @@ export class TaskService {
     this.tasks.splice(id,1);
     this.saveTasks(); 
   }
+  toggleCompletion(taskIndex: number): void {
+    const task = this.tasks[taskIndex];
+    task.completed = true;
+    this.tasks.splice(taskIndex, 1);
+    this.completedTasks.push(task);
+    this.saveTasks(); 
+  }
 
-
-  toggleCompletion(id: number): void {
-    const index = this.tasks.findIndex(task => task.Id === id);
-    if (index !== -1) {
-      this.tasks[index].completed = !this.tasks[index].completed;
-      this.saveTasks();
-    }
+  markAsNotCompleted(taskIndex: number): void {
+    const task = this.completedTasks[taskIndex];
+    task.completed = false;
+    this.completedTasks.splice(taskIndex, 1);
+    this.tasks.push(task);
+    this.saveTasks(); 
   }
   
   updateTask(updatedTask: Task): void {
