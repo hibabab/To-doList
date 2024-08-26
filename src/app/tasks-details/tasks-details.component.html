@@ -1,25 +1,36 @@
 <!-- table.component.html -->
+
+<!-- Wrapper div to enable horizontal scrolling if table overflows -->
 <div class="overflow-x-auto">
+  <!-- Table title, dynamically bound to the title input property -->
   <h2 class="text-2xl font-semibold text-gray-800 mb-4">{{ title }}</h2>
+  
+  <!-- Main table container -->
   <table class="min-w-full bg-white border border-gray-200">
     <!-- Table header -->
     <thead class="bg-gray-200 text-gray-800">
       <tr>
+        <!-- Table column headers -->
         <th scope="col" class="px-4 py-2 text-left text-xs font-medium uppercase tracking-wider">#</th>
         <th scope="col" class="px-4 py-2 text-left text-xs font-medium uppercase tracking-wider">Completed</th>
         <th scope="col" class="px-4 py-2 text-left text-xs font-medium uppercase tracking-wider">Title</th>
         <th scope="col" class="px-4 py-2 text-left text-xs font-medium uppercase tracking-wider">Description</th>
         <th scope="col" class="px-4 py-2 text-left text-xs font-medium uppercase tracking-wider">Start Date</th>
         <th scope="col" class="px-4 py-2 text-left text-xs font-medium uppercase tracking-wider">Deadline</th>
+        <!-- Conditionally display this column if showCompletionDateColumn is true -->
         <th *ngIf="showCompletionDateColumn" scope="col" class="px-4 py-2 text-left text-xs font-medium uppercase tracking-wider">Completion Date</th>
         <th scope="col" class="px-4 py-2 text-left text-xs font-medium uppercase tracking-wider">Priority</th>
         <th scope="col" class="px-4 py-2 text-left text-xs font-medium uppercase tracking-wider">Action</th>
       </tr>
     </thead>
-    <!-- Table body with tasks -->
+    
+    <!-- Table body -->
     <tbody class="bg-gray-50 divide-y divide-gray-200">
+      <!-- Iterate over the Table array to create table rows -->
       <tr *ngFor="let tc of Table; let i = index;" [ngClass]="{'bg-gray-100': tc.completed}">
+        <!-- Index of the row (1-based) -->
         <td class="px-4 py-4 whitespace-nowrap text-sm font-medium">{{ i + 1 }}</td>
+        <!-- Checkbox to mark the task as completed -->
         <td class="px-4 py-4 whitespace-nowrap text-sm">
           <input 
             class="form-checkbox h-4 w-4 text-blue-600 border-gray-300 focus:ring-blue-500 ml-2" 
@@ -27,11 +38,17 @@
             [(ngModel)]="tc.completed"
             (change)="completeOrNotComplete(i)" />
         </td>
+        <!-- Task title -->
         <td class="px-4 py-4 whitespace-nowrap text-sm">{{ tc.Title }}</td>
+        <!-- Task description -->
         <td class="px-4 py-4 whitespace-nowrap text-sm">{{ tc.Description }}</td>
+        <!-- Task start date -->
         <td class="px-4 py-4 whitespace-nowrap text-sm">{{ tc.StartDate }}</td>
+        <!-- Task deadline -->
         <td class="px-4 py-4 whitespace-nowrap text-sm">{{ tc.Deadline }}</td>
+        <!-- Conditionally display the completion date if task is completed -->
         <td *ngIf="tc.completed" class="px-4 py-4 whitespace-nowrap text-sm">{{ tc.completionDate }}</td>
+        <!-- Task priority with color-coded badge -->
         <td class="px-4 py-4 whitespace-nowrap text-sm">
           <span [ngClass]="{
             'inline-block px-2 py-1 text-xs font-semibold rounded-full text-white': true,
@@ -40,6 +57,7 @@
             'bg-green-500': tc.priority === 'Low'
           }">{{ tc.priority }}</span>
         </td>
+        <!-- Action button to delete the task -->
         <td class="px-4 py-4 whitespace-nowrap text-sm">
           <button (click)="deleteTask(i)" class="px-3 py-1 text-red-600 hover:bg-red-100 rounded focus:outline-none focus:ring-2 focus:ring-red-500 ml-2">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
