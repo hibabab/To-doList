@@ -3,7 +3,7 @@
     <div class="relative flex flex-col md:flex-row bg-white rounded-2xl shadow-lg max-w-7xl w-full h-auto md:h-[85vh] overflow-hidden">
       
       <!-- Sidebar for larger screens -->
-      <div class="relative hidden md:block md:w-1/6 bg-[#d3d3d3] h-full p-4">
+      <div class="md:block md:w-1/6 bg-[#d3d3d3] h-full p-4">
         <!-- Sidebar header with an icon and title -->
         <div class="flex items-center gap-2 mb-4">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 text-gray-700">
@@ -36,114 +36,12 @@
       
       <!-- Main content area -->
       <div class="flex flex-col w-full md:w-5/6 px-4 md:px-8 py-8 bg-gray-50 overflow-x-auto">
-        
         <!-- Tasks In Progress section -->
         <div class="mb-8">
-          <h2 class="text-2xl font-semibold text-gray-800 mb-4">Tasks In Progress</h2>
-          <table class="min-w-full bg-white border border-gray-200">
-            <!-- Table header -->
-            <thead class="bg-gray-200 text-gray-800">
-              <tr>
-                <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">#</th>
-                <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Completed</th>
-                <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Title</th>
-                <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Description</th>
-                <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Start Date</th>
-                <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Deadline</th>
-                <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">CompletionDate</th>
-                <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Priority</th>
-                <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Action</th>
-              </tr>
-            </thead>
-            <!-- Table body with tasks -->
-            <tbody class="bg-gray-50 divide-y divide-gray-200">
-              <tr *ngFor="let tc of Tasks ; let i = index;" [ngClass]="{'completed-task': tc.completed}">
-                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">{{ i + 1 }}</td>
-                <td class="px-6 py-4 whitespace-nowrap text-sm">
-                  <input 
-                    class="form-checkbox h-4 w-4 text-blue-600 border-gray-300 focus:ring-blue-500 ml-5" 
-                    type="checkbox" 
-                    [(ngModel)]="tc.completed"
-                    (change)="toggleCompletion(i)" />
-                </td>
-                <td class="px-6 py-4 whitespace-nowrap text-sm">{{ tc.Title }}</td>
-                <td class="px-6 py-4 whitespace-nowrap text-sm">{{ tc.Description }}</td>
-                <td class="px-6 py-4 whitespace-nowrap text-sm">{{ tc.StartDate }}</td>
-                <td class="px-6 py-4 whitespace-nowrap text-sm">{{ tc.Deadline }}</td>
-                <td class="px-6 py-4 whitespace-nowrap text-sm ml-8"> ---------</td>
-                <td class="px-6 py-4 whitespace-nowrap text-sm">
-                  <span [ngClass]="{
-                    'inline-block px-2 py-1 text-xs font-semibold rounded-full text-white': true,
-                    'bg-red-500': tc.priority === 'High',
-                    'bg-yellow-500': tc.priority === 'Medium',
-                    'bg-green-500': tc.priority === 'Low'
-                  }">{{ tc.priority }}</span>
-                </td>
-                <td class="px-6 py-4 whitespace-nowrap text-sm">
-                  <button (click)="deleteTask(i)" class="px-3 py-1 text-red-600 hover:bg-red-100 rounded focus:outline-none focus:ring-2 focus:ring-red-500 ml-2">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 11V17M15 11V17M3 6h18M4 6l1 14h14l1-14H4z"></path>
-                    </svg>
-                  </button>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+          <app-tasks-details [title]="'Tasks In Progress'"></app-tasks-details>
         </div>
-        
         <!-- Completed Tasks section -->
-        <div>
-          <h2 class="text-2xl font-semibold text-gray-800 mb-4">Completed Tasks</h2>
-          <table class="min-w-full bg-white border border-gray-200">
-            <!-- Table header -->
-            <thead class="bg-gray-200 text-gray-800">
-              <tr>
-                <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">#</th>
-                <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Completed</th>
-                <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Title</th>
-                <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Description</th>
-                <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Start Date</th>
-                <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Deadline</th>
-                <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">CompletionDate</th>
-                <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Priority</th>
-                <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Action</th>
-              </tr>
-            </thead>
-            <!-- Table body with completed tasks -->
-            <tbody class="bg-gray-50 divide-y divide-gray-200">
-              <tr *ngFor="let tc of completedtasks; let i = index;">
-                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">{{ i + 1 }}</td>
-                <td class="px-6 py-4 whitespace-nowrap text-sm">
-                  <input 
-                  class="form-checkbox h-4 w-4 bg-[#62895B] border-[#62895B] focus:[#62895B] ml-5"
-                    type="checkbox" 
-                    [(ngModel)]="tc.completed"
-                    (change)="NotCompetedTask(i)" />
-                </td>
-                <td class="px-6 py-4 whitespace-nowrap text-sm">{{ tc.Title }}</td>
-                <td class="px-6 py-4 whitespace-nowrap text-sm">{{ tc.Description }}</td>
-                <td class="px-6 py-4 whitespace-nowrap text-sm">{{ tc.StartDate }}</td>
-                <td class="px-6 py-4 whitespace-nowrap text-sm">{{ tc.Deadline }}</td>
-                <td class="px-6 py-4 whitespace-nowrap text-sm ml-8">{{tc.completionDate}}</td>
-                <td class="px-6 py-4 whitespace-nowrap text-sm">
-                  <span [ngClass]="{
-                    'inline-block px-2 py-1 text-xs font-semibold rounded-full text-white': true,
-                    'bg-red-500': tc.priority === 'High',
-                    'bg-yellow-500': tc.priority === 'Medium',
-                    'bg-green-500': tc.priority === 'Low'
-                  }">{{ tc.priority }}</span>
-                </td>
-                <td class="px-6 py-4 whitespace-nowrap text-sm">
-                  <button (click)="deleteTask(i)" class="px-3 py-1 text-red-600 hover:bg-red-100 rounded focus:outline-none focus:ring-2 focus:ring-red-500 ml-2">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 11V17M15 11V17M3 6h18M4 6l1 14h14l1-14H4z"></path>
-                    </svg>
-                  </button>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+        <app-tasks-details [title]="'Completed Tasks'"></app-tasks-details>
       </div>
     </div>
   </section>

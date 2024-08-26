@@ -1,7 +1,7 @@
 describe('Add Task Modal', () => {
     beforeEach(() => {
       // Visiter la page principale où le composant est affiché
-      cy.visit('http://localhost:4200'); // Assurez-vous que le chemin correspond à votre route
+      cy.visit('http://localhost:4200'); 
   
       
     });
@@ -21,23 +21,29 @@ describe('Add Task Modal', () => {
       // Ouvrir le modal
       cy.get('button').contains('Add Task').click();
   
-      // Remplir le formulaire
       cy.get('input#Title').type('New Task Title');
-      cy.get('textarea#Description').type('Description of the new task');
-      cy.get('input#StartDate').type('2024-08-01'); // Assurez-vous que la date est valide
-      cy.get('input#Deadline').type('2024-08-10'); // Assurez-vous que la date est valide
+    cy.get('textarea#Description').type('Description of the new task');
+    cy.get('input#StartDate').type('2024-08-01'); 
+    cy.get('input#Deadline').type('2024-08-10'); 
+    
+    // Sélectionner une priorité
+    cy.get('select#Priority').select('High');
+    
+    // Soumettre le formulaire
+    cy.get('button[type="submit"]').click();
   
-      // Sélectionner une priorité
-      cy.get('select#Priority').select('High');
-  
-      // Soumettre le formulaire
-      cy.get('button[type="submit"]').click();
-  
-      // Vérifiez que la tâche a été ajoutée
-      // Vous pouvez vérifier les éléments du tableau ou les données dans le local storage ici si nécessaire
+    cy.get('table tbody tr').last().within(() => {
+      cy.get('td').eq(2).should('contain', 'New Task Title');
+      cy.get('td').eq(3).should('contain', 'Description of the new task');
+      cy.get('td').eq(4).should('contain', '2024-08-01');
+      cy.get('td').eq(5).should('contain', '2024-08-10');
+      cy.get('td').eq(6).should('contain', 'High');
+    });
+  });
+      
   
       
      
     });
-  });
+  
   

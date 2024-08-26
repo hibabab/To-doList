@@ -5,6 +5,7 @@ import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
 import { ToDoListComponent } from './to-do-list/to-do-list.component';
 import { AddTasksComponent } from './add-tasks/add-tasks.component';
+import { TasksDetailsComponent } from './tasks-details/tasks-details.component';
 
 
 
@@ -15,6 +16,7 @@ import { AddTasksComponent } from './add-tasks/add-tasks.component';
     AppComponent,
       ToDoListComponent,
       AddTasksComponent,
+      TasksDetailsComponent,
       
      
   ],
