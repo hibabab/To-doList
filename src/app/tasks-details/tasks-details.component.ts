@@ -1,7 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Task } from '../shared/interface/task';
+import { Priority, Task } from '../shared/interface/task';
 import { TaskService } from '../shared/service/task.service';
 import Swal from 'sweetalert2';
+
 
 @Component({
   selector: 'app-tasks-details',
@@ -9,14 +10,44 @@ import Swal from 'sweetalert2';
   styleUrls: ['./tasks-details.component.css']
 })
 export class TasksDetailsComponent implements OnInit {
+
+
   @Input() title: string = ''; // Input property to determine the title of the task list
   Tasks: Task[] = []; // Array to store ongoing tasks
   completedtasks: Task[] = []; // Array to store completed tasks
   Table: Task[] = []; // Array to store tasks for display in the table
   showCompletionDateColumn: boolean = false; // Flag to determine if completion date column should be shown
   isModalOpen = false; // Flag to manage modal visibility
+  testedit: boolean = false;
+  
+  selectedTask= {} as Task;
+  
 
   constructor(private taskService: TaskService) {}
+
+  closeModal() {
+    this.isModalOpen = false;
+  }
+  
+  openAddTaskModal() {
+    this.selectedTask = {
+      Id: 0, 
+      Title: '',
+      Description: '',
+      StartDate: '',
+      Deadline: '',
+      priority: Priority.Low,
+      completed: false,
+      completionDate: ''
+    }; 
+    this.isModalOpen = true;
+  }
+
+  openEditTaskModal(task: Task) {
+    this.testedit=true;
+    this.selectedTask = task;
+    this.isModalOpen = true;
+  }
 
   ngOnInit(): void {
     this.loadTasks(); // Load tasks when the component initializes
@@ -37,6 +68,7 @@ export class TasksDetailsComponent implements OnInit {
     }
   }
 
+  
   deleteTask(index: number): void {
     Swal.fire({
       title: 'Are you sure?',
@@ -47,20 +79,23 @@ export class TasksDetailsComponent implements OnInit {
       cancelButtonText: 'No, cancel!',
     }).then((result) => {
       if (result.isConfirmed) {
-        this.taskService.deleteTask(index); // Call the service to delete the task
-        Swal.fire('Deleted!', 'The task has been deleted.', 'success'); // Show success message
+        const taskType = this.title === 'Tasks In Progress' ? 'ongoing' : 'completed';
+        this.taskService.deleteTask(taskType, index); 
+        this.updateTable();
+        Swal.fire('Deleted!', 'The task has been deleted.', 'success');
       }
     });
   }
+   
+  
 
   completeOrNotComplete(index: number): void {
     const task = this.Table[index]; // Get the task at the specified index
     if (task.completed) {
       this.taskService.toggleCompletion(index); // Toggle completion status if task is already completed
-      this.updateTable(); // Update the table to reflect the changes
     } else {
       this.taskService.markAsNotCompleted(index); // Mark the task as not completed
-      this.updateTable(); // Update the table to reflect the changes
     }
+    this.updateTable(); // Update the table to reflect the changes
   }
 }

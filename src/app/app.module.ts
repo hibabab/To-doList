@@ -4,8 +4,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
 import { ToDoListComponent } from './to-do-list/to-do-list.component';
-import { AddTasksComponent } from './add-tasks/add-tasks.component';
+
 import { TasksDetailsComponent } from './tasks-details/tasks-details.component';
+import { EditAddTaskComponent } from './edit-add-task/edit-add-task.component';
 
 
 
@@ -15,8 +16,9 @@ import { TasksDetailsComponent } from './tasks-details/tasks-details.component';
   declarations: [
     AppComponent,
       ToDoListComponent,
-      AddTasksComponent,
+      
       TasksDetailsComponent,
+              EditAddTaskComponent,
       
      
   ],
