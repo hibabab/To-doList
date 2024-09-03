@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Task } from '../interface/task';
+import { table } from 'node:console';
 
 @Injectable({
   providedIn: 'root'
@@ -48,11 +49,15 @@ export class TaskService {
   getCompletedTasks(): Task[] {
     return this.completedTasks;
   }
+ 
+
 
   addTask(task: Task): void {
     this.tasks.push(task);
+    
+
     this.saveTasks();
-  }
+}
 
   deleteTask(type: 'ongoing' | 'completed', index: number): void {
     if (type === 'ongoing') {

@@ -28,25 +28,21 @@ export class TasksDetailsComponent implements OnInit {
   closeModal() {
     this.isModalOpen = false;
   }
-  
-  openAddTaskModal() {
-    this.selectedTask = {
-      Id: 0, 
-      Title: '',
-      Description: '',
-      StartDate: '',
-      Deadline: '',
-      priority: Priority.Low,
-      completed: false,
-      completionDate: ''
-    }; 
-    this.isModalOpen = true;
-  }
 
-  openEditTaskModal(task: Task) {
+  updateId(): void {
+    this.Tasks.forEach((task, index) => {
+        task.Id = index + 1; // Les IDs commencent à 1
+    });
+}
+
+  openEditTaskModal(task: Task, index:number) {
     this.testedit=true;
+    console.log(this.selectedTask)
+    console.log('ok')
     this.selectedTask = task;
+    console.log(this.selectedTask)
     this.isModalOpen = true;
+    this.selectedTask.Id = index;
   }
 
   ngOnInit(): void {

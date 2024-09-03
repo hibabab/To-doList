@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Priority, Task } from '../shared/interface/task';
+import { table } from 'node:console';
 
 @Component({
   selector: 'app-to-do-list',
@@ -9,12 +10,12 @@ import { Priority, Task } from '../shared/interface/task';
 export class ToDoListComponent {
   isModalOpen = false; // Flag to manage modal visibility
   testedit: boolean = false;
-  
+   
   selectedTask= {} as Task;
   
   openAddTaskModal() {
     this.selectedTask = {
-      Id: 0, 
+      Id:0, 
       Title: '',
       Description: '',
       StartDate: '',
